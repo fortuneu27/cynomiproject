@@ -1,4 +1,4 @@
-window.baseURL = `http://${window.location.hostname}:3306/api/`;
+window.baseURL = `http://${window.location.hostname}:4000/api/`;
 
 /**
  * Returns data from requested endpoint
@@ -25,7 +25,8 @@ export default async function api<PayloadType = any>(
       | ApiResponse<PayloadType>
       | PagedResponse<PayloadType>
       | ApiErrorResponse;
-    if (request.status !== 2004) {
+    if (request.status !== 204) {
+      console.log("Getting response: " + request.status)
       response = JSON.parse(await request.text());
     } else {
       response = { status: 204 } as ApiResponse<never>;

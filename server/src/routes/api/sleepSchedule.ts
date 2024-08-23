@@ -6,18 +6,36 @@ import { SleepChart } from "../../entities/SleepChart";
 
 var router: Router = Router();
 
+interface ChartItem {
+  date: string
+  sleepDuration: number
+}
+
 /**
  * @api {GET} /sleepSchedule/chart/:name Gets sleep schedules for a given name, within the last week
  * @apiGroup SleepSchedule
  * @apiVersion 0.0.1
  */
 router.get("/chart/:name", async function (req, res) {
+  var currDateTime = moment().utc().unix()
+  var oneWeekAgo = moment().utc().subtract(1,'w').unix()
   var sleepSchedules = await SleepSchedule.createQueryBuilder('sleepSchedule')
   .where('name = :sName',{sName: req.params.name})
-  .andWhere('sleepDateTime >= :fromDate', {fromDate: moment().utc().subtract(1,'w').unix()})
-  .andWhere('sleepDateTime <= :toDate', {toDate: moment().utc().unix()})
-  if(!sleepSchedules) return res.respond(null, 404, 'Sleep schedules could not be found')
-  return res.respond(sleepSchedules, 200);
+  .andWhere('sleepDateTime >= :fromDate', {fromDate: oneWeekAgo})
+  .andWhere('sleepDateTime <= :toDate', {toDate: currDateTime})
+  .getMany()
+
+  if(!sleepSchedules) {return res.respond(null, 404, 'Sleep schedules could not be found')}
+
+  var chartArray: ChartItem[] = []
+
+  for (let i = 0; i < sleepSchedules.length; i++) {
+    const element = sleepSchedules[i]
+
+    chartArray.push({date: moment.unix(element.sleepDateTime).format('YYYY-MM-DD'), sleepDuration: element.sleepDuration})
+    
+  }
+  return res.respond(chartArray, 200);
 });
 
 /**
@@ -91,10 +109,10 @@ router.post("/", async function (req, res) {
 
   // check if a sleep has already been tracked by a user for the same gender, name and date
   var validateSleepSchedule = await SleepSchedule.createQueryBuilder('sleepSchedule')
-  .where('sleepSchedule.name = name', {name: sleepSchedule.name})
-  .andWhere('sleepSchedule.gender = gender', {gender: sleepSchedule.gender})
-  .andWhere('sleepSchedule.sleepDateTime >= fromDate', {fromDate: currentDay.startOf('day')})
-  .andWhere('sleepSchedule.sleepDateTime < toDate', {toDate: currentDay.endOf('day')})
+  .where('sleepSchedule.name = :name', {name: sleepSchedule.name})
+  .andWhere('sleepSchedule.gender = :gender', {gender: sleepSchedule.gender})
+  .andWhere('sleepSchedule.sleepDateTime >= :fromDate', {fromDate: currentDay.startOf('day').unix()})
+  .andWhere('sleepSchedule.sleepDateTime < :toDate', {toDate: currentDay.endOf('day').unix()})
   .getOne()
 
   // reject if true

@@ -45,10 +45,12 @@ export default function SleepScheduleForm() {
           var response = await api('sleepSchedule', {method: 'POST', body: JSON.stringify(values)})
           if(isErrorResponse(response)){
             setMessage(response.error)
+            setShowSnackbar(true)
             setIsError(true)
             return
           } else {
             setMessage('Successfully saved data!!')
+            setShowSnackbar(true)
             setIsError(false)
             return
           }

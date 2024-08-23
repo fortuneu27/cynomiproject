@@ -7,7 +7,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { AppDataSource } from "./data-source";
 
-var port: number = 3306
+var port: number = 4000
 
 if(fs.existsSync(path.resolve('client'))){
   app.use('/', express.static('client'))
@@ -27,7 +27,8 @@ async function main() {
       process.exit(1)
     }
   }, 20000)
-  console.log("DB connected")
+  console.log("DB connected ")
+  app.listen(port, () => console.log('Express server is runnign on port ' + port))
 }
 
 main().catch(function(error) {
