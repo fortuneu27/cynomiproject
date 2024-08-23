@@ -16,7 +16,7 @@
 # Changes i would make:
 - Add CSP
 - Add jest unit tests for apis, mocking api calls
-- Allow authentication
+- Allow authentication, store token securely (as a secure cookie)
 - Thorough validation of form data (no future sleep dates)
 - Allow editing of a record
 - Audit logging of successfull and failed post, put and delete requests
