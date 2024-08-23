@@ -20,3 +20,6 @@ Allow authentication
 Thorough validation of form data (no future sleep dates)
 Allow editing of a record
 Audit logging of successfull and failed post, put and delete requests
+
+# Current Bugs
+Currently the pagination doesnt work, it should. but seems to just set the page to 0 when you move to the next page. This a very odd and unexpected behavior

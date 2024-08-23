@@ -35,7 +35,7 @@ export default function respondMiddleware(
     ? parseInt(req.query.pageSize.toString(), 10)
     : 10;
   if (pageSize < 1) pageSize = 1;
-  if (pageSize > 25) pageSize = 25;
+  if (pageSize > 200) pageSize = 200;
   req.pageSize = pageSize;
 
   res.respond = function (payload, status = 200, error) {

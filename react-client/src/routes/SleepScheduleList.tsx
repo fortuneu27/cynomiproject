@@ -49,10 +49,11 @@ export default function SleepScheduleList(){
   }, [page, rowsPerPage])
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    event: unknown,
     newPage: number,
   ) => {
     setPage(newPage)
+    console.log(page)
   }
 
   const handleChangeRowsPerPage = (
@@ -102,13 +103,13 @@ export default function SleepScheduleList(){
               : data
             ).map((row) => (
               <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" style={{ width: 100 }}>
                   {row.name}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
+                <TableCell style={{ width: 100 }} align="right">
                   {row.gender}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
+                <TableCell style={{ width: 100 }} align="right">
                   {row.count}
                 </TableCell>
                 <TableCell style={{ width: 50 }} align="right">
@@ -120,10 +121,9 @@ export default function SleepScheduleList(){
             ))}
           </TableBody>
           <TableFooter>
-            <TableRow>
+            <TableRow style={{ width: 350 }}>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                colSpan={3}
+                rowsPerPageOptions={[5, 10, 25, 50, 100, 200]}
                 count={total}
                 rowsPerPage={rowsPerPage}
                 page={page}
