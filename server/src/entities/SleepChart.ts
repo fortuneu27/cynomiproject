@@ -6,17 +6,17 @@ export class SleepChart extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 50 })
+  @Column({ type: 'varchar', length: 50 })
   @IsString()
   @MaxLength(50)
   name: string;
 
-  @Column({ length: 50 })
+  @Column({ type: 'varchar', length: 50 })
   @IsString()
   @MaxLength(50)
   gender: string;
 
-  @Column()
+  @Column('int')
   @IsNumber()
   count: number;
 

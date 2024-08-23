@@ -5,7 +5,6 @@ import { SleepChart } from "entities/SleepChart";
 export const AppDataSource = new DataSource({
   type: "mysql",
   host: "localhost",
-  port: 4000,
   username: "sleepSchedule",
   password: "sleepSchedule@1",
   database: "sleep",

@@ -10,7 +10,7 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import PaperSheet from "../components/common/PaperSheet"
 import api, { isErrorResponse, isPagedResponse } from "../api";
-import { Alert, Button, IconButton, Snackbar } from "@mui/material";
+import { Alert, Button, Divider, Grid, IconButton, Paper, Snackbar, Typography } from "@mui/material";
 import { BarChart } from "@mui/icons-material";
 import SleepBarChart from "../components/chart/SleepBarChart";
 
@@ -76,7 +76,18 @@ export default function SleepScheduleList(){
   }
 
   return (
-    <PaperSheet title='Sleep Schedule List'>
+    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: '65px' }}>
+      <Grid container justifyContent={"space-between"} alignItems={"center"}>
+        <Grid>
+          <Typography
+            variant="h5"
+            style={{ paddingBottom: 10, textAlign: "left" }}
+          >
+            Sleep Schedule List
+          </Typography>
+        </Grid>
+      </Grid>
+      <Divider style={{ marginBottom: 20 }} />
       {showChart ? 
       <React.Fragment>
         <SleepBarChart name={selectedName} />
@@ -141,6 +152,6 @@ export default function SleepScheduleList(){
           </Alert>
         </Snackbar>
       </React.Fragment>}
-    </PaperSheet>
+    </Paper>
   )
 }

@@ -3,7 +3,7 @@ import {
   FormikProps,
   useFormik,
 } from "formik";
-import { Alert, Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
+import { Alert, Button, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Paper, Select, Snackbar, TextField, Typography } from "@mui/material";
 import * as yup from "yup";
 import { DateField, DateTimeField } from "@mui/x-date-pickers";
 import moment, { Moment } from "moment";
@@ -59,21 +59,31 @@ export default function SleepScheduleForm() {
     setShowSnackbar(!showSnackbar)
   }
 
-  const handleDateChange = (date: Moment) => {
+  const handleDateChange = (date: Moment | null) => {
     var timeStamp: number
     try {
-      timeStamp = date.utc().unix()
+      timeStamp = date!.utc().unix()
     } catch {
       timeStamp = NaN
     }
-
     formik.setFieldValue('sleepDateTime',timeStamp)
   }
   return (
-    <PaperSheet title='Track your sleep'>
+    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: '65px'  }}>
+      <Grid container justifyContent={"space-between"} alignItems={"center"}>
+        <Grid>
+          <Typography
+            variant="h5"
+            style={{ paddingBottom: 10, textAlign: "left" }}
+          >
+            Sleep Schedule Form
+          </Typography>
+        </Grid>
+      </Grid>
+      <Divider style={{ marginBottom: 20 }} />
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={40}>
-          <Grid item>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               id="name"
@@ -86,7 +96,7 @@ export default function SleepScheduleForm() {
               helperText={formik.touched.name && formik.errors.name}
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={6}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Age</InputLabel>
               <Select
@@ -105,18 +115,16 @@ export default function SleepScheduleForm() {
               {formik.touched.gender && <FormHelperText>formik.errors.gender</FormHelperText>}
             </FormControl>
           </Grid>
-        </Grid>
-        <Grid container spacing={40}>
-          <Grid item>
+          <Grid item xs={6}>
             <DateTimeField
               label="When did you fall asleep?"
-              value={formik.values.sleepDateTime ? moment.unix(formik.values.sleepDateTime) : null}
-              onChange={() => handleDateChange}
+              value={moment.unix(formik.values.sleepDateTime)}
+              onChange={(e) => handleDateChange(e)}
               onBlur={formik.handleBlur}
 //              format="YYYY-MM-DD"
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               id="sleepDuration"
@@ -130,11 +138,11 @@ export default function SleepScheduleForm() {
               helperText={formik.touched.sleepDuration && formik.errors.sleepDuration}
             />
           </Grid>
-        </Grid>
-        <Grid container spacing={40}>
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
-          </Button>
+          <Grid item xs={12}>
+            <Button color="primary" variant="contained" fullWidth type="submit">
+              Submit
+            </Button>
+          </Grid>
         </Grid>
       </form>
       <Snackbar open={showSnackbar} autoHideDuration={6000}>
@@ -147,6 +155,6 @@ export default function SleepScheduleForm() {
           {message}
         </Alert>
       </Snackbar>
-    </PaperSheet>
+    </Paper>
   );
 }
