@@ -1,4 +1,4 @@
-window.baseURL = `http://${window.location.hostname}:4000/api/`;
+window.baseURL = `http://${window.location.hostname}:3306/api/`;
 
 /**
  * Returns data from requested endpoint
@@ -12,7 +12,7 @@ export default async function api<PayloadType = any>(
 ) {
   try {
     var request = await fetch(window.baseURL + endpoint, {
-      credentials: "include",
+      credentials: "omit",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

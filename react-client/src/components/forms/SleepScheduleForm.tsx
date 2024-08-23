@@ -41,15 +41,19 @@ export default function SleepScheduleForm() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       (async () => {
-        var response = await api('sleepSchedule', {method: 'POST', body: JSON.stringify(values)})
-        if(isErrorResponse(response)){
-          setMessage(response.error)
-          setIsError(true)
-          return
-        } else {
-          setMessage('Successfully saved data!!')
-          setIsError(false)
-          return
+        try {
+          var response = await api('sleepSchedule', {method: 'POST', body: JSON.stringify(values)})
+          if(isErrorResponse(response)){
+            setMessage(response.error)
+            setIsError(true)
+            return
+          } else {
+            setMessage('Successfully saved data!!')
+            setIsError(false)
+            return
+          }
+        } catch (error) {
+          console.log("error: "+ error)
         }
       })()
     },
@@ -98,21 +102,20 @@ export default function SleepScheduleForm() {
           </Grid>
           <Grid item xs={6}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <InputLabel id="demo-simple-select-label">Gender</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={formik.values.gender}
-                label="Age"
+                label="Gender"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={formik.touched.gender && Boolean(formik.errors.gender)}
               >
-                <MenuItem value={'male'}>Male</MenuItem>
-                <MenuItem value={'female'}>Female</MenuItem>
-                <MenuItem value={'prefer not to say'}>Prefer not to say</MenuItem>
+                <MenuItem value={'male'} onClick={() => formik.setFieldValue('gender', 'male')}>Male</MenuItem>
+                <MenuItem value={'female'} onClick={() => formik.setFieldValue('gender', 'female')}>Female</MenuItem>
+                <MenuItem value={'prefer not to say'} onClick={() => formik.setFieldValue('gender', 'prefer not to say')}>Prefer not to say</MenuItem>
               </Select>
-              {formik.touched.gender && <FormHelperText>formik.errors.gender</FormHelperText>}
             </FormControl>
           </Grid>
           <Grid item xs={6}>
