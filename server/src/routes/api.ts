@@ -1,4 +1,4 @@
-import { Router } from "express"
+import { NextFunction, Router } from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
 import respondMiddleware from "../respondMiddleware"
@@ -12,7 +12,7 @@ var apiRouter: Router = Router();
 apiRouter.use(
   cors({
     origin: (origin, callback) => callback(null, true),
-    credentials: true,
+    credentials: false,
   })
 );
 
@@ -24,5 +24,11 @@ apiRouter.use(respondMiddleware);
 // Api Routes
 apiRouter.use('/sleepSchedule', sleepSchedule)
 apiRouter.use('/sleepChart', sleepChart)
+
+apiRouter.use((p, err) => {
+  console.error('Error: ', p.method, p.path)
+  if(err instanceof Error) console.error('Error: ', err.message, err.stack)
+  return p.res.respond(null, 500, 'Unhandled endpoint exception')
+}) 
 
 export default apiRouter;
