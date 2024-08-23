@@ -14,12 +14,17 @@
 
 
 # Changes i would make:
-Add CSP
-Add ject unit tests for apis
-Allow authentication
-Thorough validation of form data (no future sleep dates)
-Allow editing of a record
-Audit logging of successfull and failed post, put and delete requests
+- Add CSP
+- Add jest unit tests for apis, mocking api calls
+- Allow authentication
+- Thorough validation of form data (no future sleep dates)
+- Allow editing of a record
+- Audit logging of successfull and failed post, put and delete requests
+- Fixing UI as it could do with alot of improvement
+- Including extra fields such as Age
+- Using a sleep start and end time and infering the duration from that, this would also allow for better validation of overlapping sleeptimes
+- Maybe allow for exporting of data as a csx, xlsx
+- Converting gender to an entity so that an 'Admin' user can maintain that as opposed to having a static options list in the client 
 
 # Current Bugs
 Currently the pagination doesnt work, it should. but seems to just set the page to 0 when you move to the next page. This a very odd and unexpected behavior
