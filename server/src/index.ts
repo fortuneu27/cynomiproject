@@ -5,17 +5,21 @@ import { ConnectOptions, createConnection, DataSourceOptions, getConnectionOptio
 import app from "./app";
 import { AppDataSource } from "./data-source";
 
-var port: number = 3306;
+var port: number = 3306
 
-app.listen(port, () => console.log("Database is running"))
+async function main() {
+  var connnection  = await AppDataSource.initialize()
+  setInterval(function () {
+    if(!connnection.isInitialized){
+      console.error("DB not connected")
+      process.exit(1)
+    }
+  }, 20000)
+  console.log("DB connected")
+  app.listen(port, () => console.log("Express is connected and listening on port " + port))
+}
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log("Database is running")
-    //app.listen(port, () => console.log("Database is running"));
-  })
-  .catch((error) => {
-    console.log(error)
-    process.exit(1)
-  });
-
+main().catch(function(error) {
+  console.error("Main function has thrown an error:\n", error)
+  process.exit(2)
+})

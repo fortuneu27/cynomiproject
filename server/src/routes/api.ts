@@ -17,6 +17,7 @@ apiRouter.use(
 );
 
 apiRouter.use(bodyParser.json());
+apiRouter.use(bodyParser.urlencoded({extended: true}))
 
 apiRouter.use(respondMiddleware);
 
