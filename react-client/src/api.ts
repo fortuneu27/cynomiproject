@@ -11,6 +11,7 @@ export default async function api<PayloadType = any>(
   options?: RequestInit
 ) {
   try {
+    console.log('request: ' + endpoint + " " + options?.body)
     var request = await fetch(window.baseURL + endpoint, {
       credentials: "omit",
       headers: {

@@ -25,10 +25,10 @@ apiRouter.use(respondMiddleware);
 apiRouter.use('/sleepSchedule', sleepSchedule)
 apiRouter.use('/sleepChart', sleepChart)
 
-apiRouter.use((p, err) => {
+apiRouter.use((p, res, next, err: any) => {
   console.error('Error: ', p.method, p.path)
   if(err instanceof Error) console.error('Error: ', err.message, err.stack)
-  return p.res.respond(null, 500, 'Unhandled endpoint exception')
+  return res.respond(null, 500, 'Unhandled endpoint exception')
 }) 
 
 export default apiRouter;
