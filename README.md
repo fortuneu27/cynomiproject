@@ -27,4 +27,4 @@
 - Converting gender to an entity so that an 'Admin' user can maintain that as opposed to having a static options list in the client 
 
 # Current Bugs
-Currently the pagination doesnt work, it should. but seems to just set the page to 0 when you move to the next page. This a very odd and unexpected behavior
+Currently the pagination doesnt work, it should. but seems to just set the page to 0 when you move to the next page. This a very odd and unexpected behavior. To see more data increase the rows per page
