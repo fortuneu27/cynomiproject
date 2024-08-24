@@ -6,7 +6,7 @@
 `ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';`
 - next run this command
 `flush privileges;`
-- You can also create user using this command and grant it access to the database, using the username and password you added to the data-source.ts if its not root. `CREATE USER 'username'@'host' IDENTIFIED BY 'password'` then run this command to grant it access to the db `GRANT ALL ON database-name.* TO 'username'@'host'`
+- You can also create user using this command and grant it access to the database, using the username and password you added to the data-source.ts if its not root. `CREATE USER 'username'@'host' IDENTIFIED BY 'password'` then run this command to grant it access to the db `GRANT ALL ON database-name.* TO 'username'@'host'` also flush priviledges
 - next cd into the server directory and run `npm install && npm start`
 - if you get a database sleep not found error. Open SQL workbench, open the connection to the sleep database you made and run the this command `CREATE database sleep`. Then rerun `npm start`
 
