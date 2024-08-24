@@ -11,7 +11,7 @@
 - if you get a database sleep not found error. Open SQL workbench, open the connection to the sleep database you made and run the this command `CREATE database sleep`. Then rerun `npm start`
 
 ## Client
-- cd into the reac-client directory and run `npm install && npm start`
+- cd into the react-client directory and run `npm install && npm start`
 
 
 # Changes i would make:
