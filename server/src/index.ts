@@ -9,6 +9,7 @@ import { AppDataSource } from "./data-source";
 
 var port: number = 4000
 
+//not in use
 if(fs.existsSync(path.resolve('client'))){
   app.use('/', express.static('client'))
   app.use((req, res) => {

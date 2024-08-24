@@ -46,7 +46,6 @@ export default function SleepBarChart(props: Props) {
         setShowError(true)
         return
       } else {
-        console.log(response.payload)
         setChartData(response.payload)
       }
     })()

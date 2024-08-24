@@ -121,7 +121,6 @@ export default function SleepScheduleList(){
     newPage: number,
   ) => {
     setPage(newPage)
-    console.log(page)
   }
 
   const handleChangeRowsPerPage = (
