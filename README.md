@@ -27,6 +27,3 @@
 - Maybe allow for exporting of data as a csx, xlsx
 - Converting gender to an entity so that an 'Admin' user can maintain that as opposed to having a static options list in the client 
 - Avoid duplication of data in the SleepCharts table by only using the SleepSchedule data and getting the list of data needed for the SleepSchedule list page by querying the SleepSchedule table, accumulating the results and calculating the count before returning it.
-
-# Current Bugs
-Currently the pagination doesnt work, it should. but seems to just set the page to 0 when you move to the next page. This a very odd and unexpected behavior. To see more data increase the rows per page

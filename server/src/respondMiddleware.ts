@@ -27,8 +27,8 @@ export default function respondMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  var page = req.query.page ? parseInt(req.query.page.toString(), 10) : 1;
-  if (page < 1) page = 1;
+  var page = req.query.page ? parseInt(req.query.page.toString(), 10) : 0;
+  if (page < 0) page = 0;
   req.page = page;
 
   var pageSize = req.query.pageSize

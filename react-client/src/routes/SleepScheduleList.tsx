@@ -165,9 +165,7 @@ export default function SleepScheduleList(){
       <React.Fragment>
         <Table sx={{ minWidth: 500 }} aria-label="sleep schedule list">
           <TableBody>
-            {(rowsPerPage > 0
-              ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : data
+            {(data
             ).map((row) => (
               <TableRow key={row.name}>
                 <TableCell component="th" scope="row" style={{ width: 100 }}>

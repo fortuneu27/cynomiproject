@@ -61,5 +61,5 @@ export function isPagedResponse<PayloadType = any>(
     | PagedResponse<PayloadType>
     | ApiErrorResponse
 ): response is PagedResponse<PayloadType> {
-  return (response as PagedResponse<PayloadType>).page > 0;
+  return (response as PagedResponse<PayloadType>).page >= 0;
 }
